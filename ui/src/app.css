@@ -3,6 +3,7 @@
   --top-bottom-padding: 4px;
   --inner-roundness: 5.5px;
   --backgroung-grid-size: 38px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 html {
@@ -31,25 +32,19 @@ body {
   height: 100dvh;
   margin: 0;
 
-  background-image: radial-gradient(
-      circle at center center,
+  background-image: radial-gradient(circle at center center,
       transparent 50%,
-      rgb(0, 0, 0) 200%
-    ),
-    repeating-linear-gradient(
-      0deg,
+      rgb(0, 0, 0) 200%),
+    repeating-linear-gradient(0deg,
       rgba(63, 63, 63, 0.2) 0px,
       rgba(63, 63, 63, 0.2) 1px,
       transparent 1px,
-      transparent var(--backgroung-grid-size)
-    ),
-    repeating-linear-gradient(
-      90deg,
+      transparent var(--backgroung-grid-size)),
+    repeating-linear-gradient(90deg,
       rgba(63, 63, 63, 0.2) 0px,
       rgba(63, 63, 63, 0.2) 1px,
       transparent 1px,
-      transparent var(--backgroung-grid-size)
-    ),
+      transparent var(--backgroung-grid-size)),
     linear-gradient(90deg, hsl(240, 17%, 2%), hsl(235, 50%, 9%));
   color: hsl(240, 76%, 87%);
 }
@@ -130,7 +125,7 @@ body {
   transition: 0.4s;
 }
 
-input:checked + .slider-track .slider {
+input:checked+.slider-track .slider {
   left: 50%;
 }
 
@@ -210,4 +205,50 @@ input:checked + .slider-track .slider {
 
 .button:hover {
   background-color: hsl(235, 50%, 35%);
+}
+
+/* Messages.css */
+.message {
+  display: inline-block;
+  max-width: 70%;
+  margin: 5px;
+  padding: 10px;
+  border-radius: 10px;
+  overflow-wrap: break-word;
+  overflow-x: auto;
+  white-space: pre-wrap;
+}
+
+.message li {
+  white-space: normal;
+}
+
+.message pre div {
+  border-radius: 8px;
+  font-size: 12px;
+}
+
+p code {
+  background-color: hsl(213, 39%, 17%);
+  border-radius: 3px;
+  color: hsl(240, 50%, 80%);
+  padding: 1px 5px 2px 5px;
+}
+
+.user-message {
+  background-color: hsl(235, 55%, 45%);
+  color: hsl(240, 76%, 90%);
+  float: right;
+  clear: both;
+}
+
+.assistant-message {
+  background-color: hsl(235, 23%, 65%);
+  color: hsl(240, 30%, 25%);
+  float: left;
+  clear: both;
+}
+
+.message * {
+  margin: 0px;
 }
