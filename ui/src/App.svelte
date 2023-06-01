@@ -49,20 +49,28 @@
   }
 
   async function handleResponse(response) {
-    const reader = response.body.getReader();
-    const decoder = new TextDecoder("utf-8");
-    let assistantMessage = "";
+  const reader = response.body.getReader();
+  const decoder = new TextDecoder("utf-8");
 
-    while (true) {
-      const { value, done } = await reader.read();
-      if (done) {
-        messages.update(msgs => [...msgs, { role: "assistant", content: assistantMessage }]);
-        break;
+  while (true) {
+    const { value, done } = await reader.read();
+    if (done) break;
+
+    const text = decoder.decode(value);
+    messages.update((msgs) => {
+      // Check if last message was from the assistant
+      if (msgs.length > 0 && msgs[msgs.length - 1].role === "assistant") {
+        // Create a copy of the last assistant message and append text
+        let lastMessage = { ...msgs[msgs.length - 1], content: msgs[msgs.length - 1].content + text };
+        // Return the messages with the old messages plus the updated message
+        return [...msgs.slice(0, -1), lastMessage];
+      } else {
+        // If last message was not from the assistant, add a new message from the assistant
+        return [...msgs, { role: "assistant", content: text }];
       }
-      const text = decoder.decode(value);
-      assistantMessage += text;
-    }
+    });
   }
+}
 
   async function handleSubmit(event) {
     event.preventDefault();
